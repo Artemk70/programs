@@ -2,10 +2,10 @@
 *.class
 .idea/
 target/
-/test/
+/src/test/
 # Log file
 *.log
-
+*.iml
 # BlueJ files
 *.ctxt
 
