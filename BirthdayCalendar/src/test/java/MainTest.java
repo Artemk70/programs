@@ -75,7 +75,8 @@ class MainTest {
     }
 
     private void launch(int day, int month, int year, String exp){
-        String act = Main.collectBirthdays(year, month, day);
+        BirthdayCalendar calendar = new BirthdayCalendar();
+        String act = calendar.collectBirthdays(year, month, day);
         Assertions.assertEquals(exp, act.strip());
     }
 
