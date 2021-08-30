@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        Date birthDay = Date.valueOf(LocalDate.of(1900,7,20));
+        Date birthDay = Date.valueOf(LocalDate.of(1900, 7, 20));
 
         Client client = new Client("Artem", birthDay, "+79876543210", "first@gmail.com");
         Client client2 = new Client("Oleg", birthDay, "+79876543210", "second@gmail.com");
@@ -23,6 +23,8 @@ public class Main {
             addClientToDB.addToDB(client2);
             addClientToDB.addToDB(client3);
             addClientToDB.addToDB(client4);
+
+            addClientToDB.printDB();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

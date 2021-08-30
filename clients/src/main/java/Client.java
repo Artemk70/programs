@@ -99,7 +99,7 @@ public class Client {
 
     private boolean phoneNumberValidate(String phoneNumber) {
         String pattern = "([7|8]{1})([0-9]{10})";
-        String number = phoneNumber.replaceAll("[^0-9]","");
+        String number = phoneNumber.replaceAll("[^0-9]", "");
         return number.matches(pattern);
     }
 

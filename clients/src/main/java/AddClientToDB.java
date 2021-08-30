@@ -26,9 +26,6 @@ public class AddClientToDB {
         try {
 
 
-//            connection.createStatement().execute(dropTable);
-//            connection.createStatement().execute(addTable);
-
             PreparedStatement preparedStatement = connection.prepareStatement(addClient);
             preparedStatement.setString(1, client.getName());
             preparedStatement.setDate(2, client.getBirthday());
@@ -38,24 +35,12 @@ public class AddClientToDB {
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
-            preparedStatement = connection.prepareStatement("SELECT * FROM clients");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            StringBuilder builder = new StringBuilder();
-            while (resultSet.next()) {
-                builder.append(resultSet.getString("name") + "\n");
-                builder.append(resultSet.getDate("birthday") + "\n");
-                builder.append(resultSet.getString("phone") + "\n");
-                builder.append(resultSet.getString("eMail") + "\n");
-            }
-            System.out.println(builder.toString());
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    public void addTable() throws SQLException{
+    public void addTable() throws SQLException {
         String addTable = "CREATE TABLE clients (" +
                 "id INT AUTO_INCREMENT, " +
                 "name VARCHAR(50) NOT NULL, " +
@@ -68,8 +53,26 @@ public class AddClientToDB {
         connection.createStatement().execute(addTable);
     }
 
-    public void dropTable() throws SQLException{
+    public void dropTable() throws SQLException {
         connection.createStatement().execute("DROP TABLE IF EXISTS clients");
+    }
+
+    public void printDB() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM clients");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        StringBuilder builder = new StringBuilder();
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
+            Date birthday = resultSet.getDate("birthday");
+            String phone = resultSet.getString("phone");
+            String eMail = resultSet.getString("eMail");
+
+            builder.append(name + " | " + birthday + " | " + phone + " | " + eMail);
+            builder.append("\n");
+        }
+        resultSet.close();
+        System.out.println(builder.toString());
     }
 
 }
