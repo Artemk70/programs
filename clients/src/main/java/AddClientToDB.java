@@ -11,20 +11,8 @@ public class AddClientToDB {
     }
 
     public void addToDB(Client client) {
-        String addTable = "CREATE TABLE clients (" +
-                "id INT AUTO_INCREMENT, " +
-                "name VARCHAR(50) NOT NULL, " +
-                "birthday DATE NOT NULL, " +
-                "phone VARCHAR(15) NOT NULL, " +
-                "eMail VARCHAR(50), " +
-                "PRIMARY KEY(id)" +
-                ")";
-
-        String dropTable = "DROP TABLE IF EXISTS clients";
-
         String addClient = "INSERT INTO clients(name, birthday, phone, eMail) VALUES(?, ?, ?, ?)";
         try {
-
 
             PreparedStatement preparedStatement = connection.prepareStatement(addClient);
             preparedStatement.setString(1, client.getName());

@@ -2,11 +2,16 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
 public class Client {
     private String name;
     private Date birthday;
     private String phoneNumber;
     private String eMail;
+
+    private final String PHONE_NUMBER_ERROR = "неверный формат номера телефона";
+    private final String EMAIL_FORMAT_ERROR = "неверный формат e-mail";
+    private final String DATE_ERROR = "введенная дата позже текущей";
 
     public Client(String name, Date birthday, String phoneNumber, String eMail) {
         this.name = name;
@@ -14,19 +19,19 @@ public class Client {
         if (birthday.before(Date.valueOf(LocalDate.now()))) {
             this.birthday = birthday;
         } else {
-            throw new RuntimeException("вы еще не родились");
+            throw new RuntimeException(PHONE_NUMBER_ERROR);
         }
 
         if (phoneNumberValidate(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            throw new RuntimeException("неверный формат номера");
+            throw new RuntimeException("");
         }
 
         if (eMailValidate(eMail)) {
             this.eMail = eMail;
         } else {
-            throw new RuntimeException("неверный формат eMail");
+            throw new RuntimeException(EMAIL_FORMAT_ERROR);
         }
     }
 
@@ -46,7 +51,7 @@ public class Client {
         if (birthday.after(new Date(System.currentTimeMillis()))) {
             this.birthday = birthday;
         } else {
-            throw new RuntimeException("вы еще не родились");
+            throw new RuntimeException(DATE_ERROR);
         }
     }
 
@@ -58,7 +63,7 @@ public class Client {
         if (phoneNumberValidate(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            throw new RuntimeException("неверный формат номера");
+            throw new RuntimeException(PHONE_NUMBER_ERROR);
         }
     }
 
@@ -70,7 +75,7 @@ public class Client {
         if (eMailValidate(eMail)) {
             this.eMail = eMail;
         } else {
-            throw new RuntimeException("неверный формат eMail");
+            throw new RuntimeException(EMAIL_FORMAT_ERROR);
         }
     }
 
@@ -104,7 +109,7 @@ public class Client {
     }
 
     private boolean eMailValidate(String eMail) {
-        String pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
+        String pattern = "^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$";
         return eMail.matches(pattern);
     }
 }
