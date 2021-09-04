@@ -23,9 +23,9 @@ public class Client {
         }
 
         if (phoneNumberValidate(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
+            this.phoneNumber = phoneNumber.replaceAll("\\+", "");
         } else {
-            throw new RuntimeException("");
+            throw new RuntimeException(PHONE_NUMBER_ERROR);
         }
 
         if (eMailValidate(eMail)) {
@@ -103,7 +103,7 @@ public class Client {
     }
 
     private boolean phoneNumberValidate(String phoneNumber) {
-        String pattern = "([7|8]{1})([0-9]{10})";
+        String pattern = "([7]{1})([0-9]{10})";
         String number = phoneNumber.replaceAll("[^0-9]", "");
         return number.matches(pattern);
     }

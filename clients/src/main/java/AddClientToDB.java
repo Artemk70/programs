@@ -36,7 +36,7 @@ public class AddClientToDB {
                 "phone VARCHAR(12) NOT NULL, " +
                 "eMail VARCHAR(20), " +
                 "PRIMARY KEY(id), " +
-                "UNIQUE KEY phone_number(phone)" +
+                "UNIQUE KEY phone(phone)" +
                 ")";
 
         connection.createStatement().execute(addTable);
