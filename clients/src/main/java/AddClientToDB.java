@@ -23,8 +23,8 @@ public class AddClientToDB {
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -33,9 +33,10 @@ public class AddClientToDB {
                 "id INT AUTO_INCREMENT, " +
                 "name VARCHAR(50) NOT NULL, " +
                 "birthday DATE NOT NULL, " +
-                "phone VARCHAR(15) NOT NULL, " +
-                "eMail VARCHAR(50), " +
-                "PRIMARY KEY(id)" +
+                "phone VARCHAR(12) NOT NULL, " +
+                "eMail VARCHAR(20), " +
+                "PRIMARY KEY(id), " +
+                "UNIQUE KEY phone_number(phone)" +
                 ")";
 
         connection.createStatement().execute(addTable);
