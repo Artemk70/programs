@@ -16,8 +16,8 @@ public class DefaultController {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Value("${parameter.value}")
-    private Integer parameter;
+//    @Value("${parameter.value}")
+//    private Integer parameter;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -28,7 +28,7 @@ public class DefaultController {
         }
         model.addAttribute("todoList", todoList);
         model.addAttribute("todoListCount", todoList.size());
-        model.addAttribute("parameter", parameter);
+//        model.addAttribute("parameter", parameter);
         return "index";
     }
 }

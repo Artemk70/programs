@@ -7,14 +7,6 @@ $(function(){
             .append('<div>' + taskCode + '</div>');
     };
 
-//    Loading todoList on load page
-//    $.get('/todoList/', function(response)
-//    {
-//        for(i in response) {
-//            appendTask(response[i]);
-//        }
-//    });
-
     //Show adding task form
     $('#show-add-task-form').click(function(){
         $('#task-form').css('display', 'flex');
@@ -67,6 +59,29 @@ $(function(){
                     task[dataArray[i]['name']] = dataArray[i]['value'];
                 }
                 appendTask(task);
+            }
+        });
+        return false;
+    });
+
+    //Deleting task
+    $('#delete-task').click(function()
+    {
+        var data = $('#task-form form').serialize();
+        $.ajax({
+            method: "DELETE",
+            url: '/todoList/',
+            data: data,
+            success: function(response)
+            {
+                $('#task-form').css('display', 'none');
+                var task = {};
+                // task.id = response;
+                // var dataArray = $('#task-form form').serializeArray();
+                // for(i in dataArray) {
+                //     task[dataArray[i]['name']] = dataArray[i]['value'];
+                // }
+                // appendTask(task);
             }
         });
         return false;

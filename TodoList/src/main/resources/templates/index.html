@@ -13,8 +13,8 @@
             <h2>Добавление задачи</h2>
             <label>Содержание:</label>
             <input type="text" name="name" value="">
-            <label>Год:</label>
-            <input type="text" name="year" value="">
+            <!-- <label>Год:</label>
+            <input type="text" name="year" value=""> -->
             <hr>
             <button id="save-task">Сохранить</button>
         </form>
@@ -22,11 +22,13 @@
     <h3>Список дел (<span th:text="${todoListCount}">0</span>)</h3>
     <button id="show-add-task-form">Добавить задачу</button>
     <br><br>
+    <button id="delete-task">Удалить все</button>
+    <br><br>
     <div id="task-list">
         <div th:each="task : ${todoList}">
             <a href="#" class="task-link" th:attr="data-id=${task.id}" th:text="${task.name}"></a>
         </div>
     </div>
-    <p th:text="${parameter}"></p>
+<!--    <p th:text="${parameter}"></p>-->
 </body>
 </html>
