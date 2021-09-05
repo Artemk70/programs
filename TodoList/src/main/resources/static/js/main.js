@@ -7,6 +7,7 @@ $(function(){
             .append('<div>' + taskCode + '</div>');
     };
 
+    
     //Show adding task form
     $('#show-add-task-form').click(function(){
         $('#task-form').css('display', 'flex');
@@ -75,7 +76,7 @@ $(function(){
             success: function(response)
             {
                 $('#task-form').css('display', 'none');
-                var task = {};
+                // var task = {};
                 // task.id = response;
                 // var dataArray = $('#task-form form').serializeArray();
                 // for(i in dataArray) {

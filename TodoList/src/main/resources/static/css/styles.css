@@ -1,3 +1,8 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
 * {
     font-family: Arial;
 }
@@ -12,7 +17,7 @@
     width: 100%;
     height: 100%;
     z-index: 10;
-    background-color: #88888878;
+    background-color: #f0ec10;
 }
 
 #task-form form {
@@ -34,6 +39,42 @@
     margin-bottom: 5px;
 }
 
-h4 {
-    margin-bottom: 0;
+#show-add-task-form {
+    background-color: lightseagreen;
+    border-radius: 20px;
+    width:140px;
+    height:40px;
+}
+
+#delete-tasks {
+    background-color: lightseagreen;
+    border-radius: 20px;
+    width:140px;
+    height:40px;
+    margin-left: 20px;
+}
+
+#delete-task {
+    background-color: lightseagreen;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.fixed_container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px 0px 20px 20px;
+    border-radius: 20px;
+    background-color: rgba(15, 9, 44, 0.521);
+    
+}
+
+.fixed_container h2 {
+    margin: 0px;
+}
+
+.task-link {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
 }
