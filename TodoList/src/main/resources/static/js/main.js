@@ -7,7 +7,7 @@ $(function(){
             .append('<div>' + taskCode + '</div>');
     };
 
-    
+
     //Show adding task form
     $('#show-add-task-form').click(function(){
         $('#task-form').css('display', 'flex');
