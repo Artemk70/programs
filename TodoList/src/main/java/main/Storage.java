@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class Storage {
-//    private int currentId = 1;
+    //    private int currentId = 1;
     private AtomicInteger currentIdd = new AtomicInteger(0);
     private final ConcurrentMap<Integer, Task> todoList = new ConcurrentHashMap<>();
 
@@ -39,7 +39,7 @@ public class Storage {
         todoList.replace(idTask, task);
     }
 
-    public void updateToDoList(Task task){
+    public void updateToDoList(Task task) {
         todoList.clear();
         currentIdd.set(0);
         int id = currentIdd.incrementAndGet();
@@ -47,11 +47,11 @@ public class Storage {
         todoList.put(id, task);
     }
 
-    public void deleteToDoList(){
+    public void deleteToDoList() {
         todoList.clear();
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         todoList.remove(id);
     }
 }

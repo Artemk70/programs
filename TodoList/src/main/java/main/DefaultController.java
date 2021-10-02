@@ -1,7 +1,7 @@
 package main;
 
 import main.model.Task;
-import main.model.TaskRepository;
+import main.services.inter.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

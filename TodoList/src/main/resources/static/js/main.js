@@ -60,6 +60,7 @@ $(function(){
                     task[dataArray[i]['name']] = dataArray[i]['value'];
                 }
                 appendTask(task);
+                location.reload();
             }
         });
         return false;

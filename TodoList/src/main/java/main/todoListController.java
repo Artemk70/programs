@@ -1,8 +1,7 @@
 package main;
 
 import main.model.Task;
-import main.model.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.services.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,21 +11,24 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/todoList")
 public class todoListController {
 
-    @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    @PostMapping("/todoList/")
-    public int add(Task task) {
-        Task newTask = taskRepository.save(task);
-        return newTask.getId();
+    public todoListController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
-    @PutMapping("/todoList/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, Task task) {
-        if (taskRepository.existsById(id)) {
-            Optional<Task> optionalTask = taskRepository.findById(id);
+    @PostMapping()
+    public ResponseEntity<Integer> add(Task task) {
+        return new ResponseEntity<>(taskService.add(task), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Task task) {
+        if (taskService.existsById(id)) {
+            Optional<Task> optionalTask = taskService.findById(id);
 
             if (optionalTask.isPresent()) {
 
@@ -35,24 +37,30 @@ public class todoListController {
                 newTask.setName(task.getName());
                 newTask.setYear(task.getYear());
 
-                taskRepository.save(newTask);
-                return new ResponseEntity<>(taskRepository.findById(id), HttpStatus.OK);
+                taskService.save(newTask);
+                return new ResponseEntity<>(taskService.findById(id), HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 
     }
 
-    @PutMapping("/todoList/")
+    @PutMapping()
     public ResponseEntity<?> update(Task task) {
-        taskRepository.deleteAll();
-        taskRepository.save(task);
-        return new ResponseEntity<>(taskRepository.findById(task.getId()), HttpStatus.OK);
+        taskService.deleteAll();
+        taskService.save(task);
+
+        Optional<Task> optionalTask = taskService.findById(task.getId());
+        if (optionalTask.isPresent()) {
+            return new ResponseEntity<>(optionalTask.get(), HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
-    @GetMapping("/todoList/")
+    @GetMapping()
     public List<Task> list() {
-        Iterable<Task> taskIterable = taskRepository.findAll();
+        Iterable<Task> taskIterable = taskService.findAll();
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task task : taskIterable) {
             tasks.add(task);
@@ -60,26 +68,24 @@ public class todoListController {
         return tasks;
     }
 
-    @GetMapping("/todoList/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable int id) {
-        Optional<Task> optionalBook = taskRepository.findById(id);
+        Optional<Task> optionalBook = taskService.findById(id);
         if (!optionalBook.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return new ResponseEntity<>(optionalBook.get(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/todoList/")
+    @DeleteMapping()
     public void delete() {
-        if (taskRepository != null) {
-            taskRepository.deleteAll();
-        }
+        taskService.deleteAll();
     }
 
-    @DeleteMapping("/todoList/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
-        if (taskRepository.existsById(id)) {
-            taskRepository.deleteById(id);
+        if (taskService.existsById(id)) {
+            taskService.deleteById(id);
         }
     }
 }
